@@ -1,0 +1,13 @@
+.container {
+  height: 100vh;
+  width: 100vw;
+}
+.brand{
+    font-size: 2rem;
+}
+.content{
+  padding-top: 2vh;
+  padding-left: 4vh;
+  padding-right: 4vh;
+  padding-bottom: 4vh;
+}
