@@ -7,12 +7,11 @@ function App() {
       <Routes>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/*" element={<Dashboard />} />
-        <Route path="/dashboard/delivery" element={<Dashboard />} />
-        <Route path="/dashboard/product" element={<Dashboard />} />
-        <Route path="/dashboard/category" element={<Dashboard />} />
-        <Route path="/dashboard/user" element={<Dashboard />} />
-        <Route path="/dashboard/payment" element={<Dashboard />} />
-        <Route path="/dashboard/unitcategory" element={<Dashboard />} />
+
+        <Route
+          path="/dashboard/createproduct"
+          element={<Dashboard special="createproduct" />}
+        />
 
         <Route path="/cart" />
       </Routes>
