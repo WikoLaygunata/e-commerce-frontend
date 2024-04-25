@@ -12,6 +12,10 @@ function App() {
           path="/dashboard/createproduct"
           element={<Dashboard special="createproduct" />}
         />
+        <Route
+          path="/dashboard/productdetail/:slug"
+          element={<Dashboard special="productdetail" />}
+        />
 
         <Route path="/cart" />
       </Routes>

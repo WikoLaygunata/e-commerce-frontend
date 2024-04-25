@@ -3,7 +3,7 @@ import TextArea from "antd/es/input/TextArea";
 import { useState } from "react";
 
 export const ProductForm = () => {
-  const OPTIONS = ["Apples", "Nails", "Bananas", "Helicopters"];
+  const OPTIONS = ["Category 1", "Category 2", "Category 3", "Category 4"];
 
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
@@ -105,7 +105,7 @@ export const ProductForm = () => {
               type="primary"
               style={{ width: "20%", margin: 15, height: 40 }}
             >
-              Submit
+              Save
             </Button>
           </Flex>
         </Form>

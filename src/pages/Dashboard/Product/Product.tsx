@@ -83,10 +83,17 @@ export const Product = () => {
                 title: "Action",
                 align: "center",
                 width: 300,
-                render: () => (
+                render: (record) => (
                   <>
                     <ButtonGroup>
-                      <Button style={{ width: 80 }}>Detail</Button>
+                      <Button
+                        style={{ width: 80 }}
+                        onClick={() => {
+                          navigate("../dashboard/productdetail/" + record.slug);
+                        }}
+                      >
+                        Detail
+                      </Button>
                       <Button danger type="primary" style={{ width: 80 }}>
                         Delete
                       </Button>

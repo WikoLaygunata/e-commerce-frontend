@@ -12,6 +12,7 @@ import { Payment } from "./Payment/Payment";
 import { Category } from "./Category/Category";
 import { UnitCategory } from "./UnitCategory/UnitCategory";
 import { CreateProduct } from "./Product/CreateProduct";
+import { ProductDetail } from "./Product/ProductDetail";
 
 export const Dashboard = ({ special }: { special?: string }) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -23,10 +24,13 @@ export const Dashboard = ({ special }: { special?: string }) => {
     if (specialMenu != undefined) {
       switch (specialMenu) {
         case "createproduct":
-            specialMenu = "";
-            return <CreateProduct />;
+          specialMenu = "";
+          return <CreateProduct />;
+        case "productdetail":
+          specialMenu = "";
+          return <ProductDetail />;
         default:
-          return <div>Not Found</div>;
+          break;
       }
     } else {
       switch (key) {
