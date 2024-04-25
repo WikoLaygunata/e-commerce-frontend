@@ -21,6 +21,7 @@ export const Product = () => {
           <Table
             bordered
             dataSource={data}
+            rowKey={(record) => record.id}
             columns={[
               {
                 dataIndex: "index",
@@ -57,8 +58,8 @@ export const Product = () => {
                 render: () => (
                   <>
                     <ButtonGroup>
-                      <Button style={{ width:80 }}>Detail</Button>
-                      <Button danger type="primary" style={{ width:80 }}>
+                      <Button style={{ width: 80 }}>Detail</Button>
+                      <Button danger type="primary" style={{ width: 80 }}>
                         Delete
                       </Button>
                     </ButtonGroup>

@@ -5,12 +5,27 @@ import { CiDatabase, CiDeliveryTruck, CiShoppingCart } from "react-icons/ci";
 import { FaUser } from "react-icons/fa";
 import { FiBox } from "react-icons/fi";
 import { MdOutlineCategory, MdOutlinePayment } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
-export const DashboardSider = ({ collapsed }: { collapsed: boolean }) => {
+export const DashboardSider = ({
+  collapsed,
+  setSelectedMenu,
+}: {
+  collapsed: boolean;
+  setSelectedMenu: Function;
+}) => {
+  const navigate = useNavigate();
+
+  function handleRouteChange({ key }: { key: string }) {
+    setSelectedMenu(key);
+    navigate(`/dashboard/${key}`);
+  }
+
   return (
     <Sider collapsed={collapsed} theme="light">
       <Menu
         mode="inline"
+        onClick={handleRouteChange}
         items={[
           {
             label: "Order",
@@ -49,7 +64,7 @@ export const DashboardSider = ({ collapsed }: { collapsed: boolean }) => {
               },
               {
                 label: "Unit Category",
-                key: "Unit Category",
+                key: "unitcategory",
                 icon: <MdOutlineCategory />,
               },
             ],
