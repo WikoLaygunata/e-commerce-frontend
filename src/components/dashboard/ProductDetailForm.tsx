@@ -32,10 +32,10 @@ export const ProductDetailForm = () => {
   }, [data]);
   const OPTIONS: string[] = categories?.map((a) => a.name)!;
 
-  const filteredOptions = OPTIONS?.filter((o) => selectedItems?.includes(o));
+  const filteredOptions = OPTIONS?.filter((o) => !selectedItems?.includes(o));
   return (
     <>
-      {data && unitCategories && categories && selectedItems && (
+      {data && unitCategories && selectedItems != undefined && (
         <Card>
           <Form
             layout="horizontal"
