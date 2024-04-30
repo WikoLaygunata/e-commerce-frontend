@@ -52,6 +52,7 @@ export const ProductDetailForm = () => {
 
   useEffect(() => {
     setSelectedItems(data?.categories.map((x) => x.name)!);
+    setPreviewImage("http://localhost:3000/products/image/" + data?.image);
   }, [data]);
   const OPTIONS: string[] = categories?.map((a) => a.name)!;
   const filteredOptions = OPTIONS?.filter((o) => !selectedItems?.includes(o));
@@ -61,9 +62,11 @@ export const ProductDetailForm = () => {
   const handleChange: UploadProps["onChange"] = async ({
     fileList: newFileList,
   }) => {
+    if (newFileList[0].size! > 2 * 1024 * 1024) {
+      return;
+    }
     const url = await getBase64(newFileList[0].originFileObj!);
     setPreviewImage(url);
-    //setUploadFiles(newFileList)
   };
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {
@@ -71,6 +74,7 @@ export const ProductDetailForm = () => {
     }
     setPreviewImage(file.url || (file.preview as string));
   };
+
   return (
     <>
       {data && unitCategories && selectedItems != undefined && (
@@ -103,9 +107,10 @@ export const ProductDetailForm = () => {
 
                   <Upload
                     style={{ width: 200 }}
+                    multiple={false}
                     name="file"
                     accept=".png,.jpg,.jpeg"
-                    showUploadList={false}
+                    showUploadList={true}
                     beforeUpload={(file) => {
                       const isLt2M = file.size / 1024 / 1024 < 2;
                       if (!isLt2M) {
@@ -113,6 +118,7 @@ export const ProductDetailForm = () => {
                       }
                       return isLt2M;
                     }}
+                    fileList={[]}
                     onChange={handleChange}
                     onPreview={handlePreview}
                   >
