@@ -98,6 +98,7 @@ export const ProductForm = () => {
       });
     } catch (e) {
       const error = e as AxiosError;
+      message.error(error.response?.statusText);
       console.log(error.response?.statusText);
     }
   };

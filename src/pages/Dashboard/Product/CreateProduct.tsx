@@ -8,9 +8,10 @@ export const CreateProduct = () => {
     <>
       <Flex justify="space-between">
         <Title level={2}>Create Product Page</Title>
-        <BackButton to="../dashboard/product" />
+        <BackButton to="../product" />
       </Flex>
       <ProductForm />
     </>
   );
 };
+export default CreateProduct;

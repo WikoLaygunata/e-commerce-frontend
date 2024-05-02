@@ -7,17 +7,10 @@ import { FiBox } from "react-icons/fi";
 import { MdOutlineCategory, MdOutlinePayment } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
-export const DashboardSider = ({
-  collapsed,
-  setSelectedMenu,
-}: {
-  collapsed: boolean;
-  setSelectedMenu: Function;
-}) => {
+export const DashboardSider = ({ collapsed }: { collapsed: boolean }) => {
   const navigate = useNavigate();
 
   function handleRouteChange({ key }: { key: string }) {
-    setSelectedMenu(key);
     navigate(`/dashboard/${key}`);
   }
 

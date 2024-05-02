@@ -8,7 +8,7 @@ export const ProductDetail = () => {
     <>
       <Flex justify="space-between">
         <Title level={2}>Product Detail Page</Title>
-        <BackButton to="../dashboard/product" />
+        <BackButton to="../product" />
       </Flex>
       <ProductDetailForm />
     </>

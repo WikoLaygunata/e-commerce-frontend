@@ -229,3 +229,5 @@ export const ProductDetailForm = () => {
     </>
   );
 };
+
+export default ProductDetailForm;

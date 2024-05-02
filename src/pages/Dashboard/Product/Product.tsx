@@ -36,7 +36,7 @@ export const Product = () => {
                 type="primary"
                 style={{ marginLeft: 20 }}
                 onClick={() => {
-                  navigate("../dashboard/createproduct");
+                  navigate("../createproduct");
                 }}
               >
                 + Add New Product
@@ -89,7 +89,7 @@ export const Product = () => {
                       <Button
                         style={{ width: 80 }}
                         onClick={() => {
-                          navigate("../dashboard/productdetail/" + record.slug);
+                          navigate("../productdetail/" + record.slug);
                         }}
                       >
                         Detail
