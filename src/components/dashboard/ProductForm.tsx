@@ -14,11 +14,12 @@ import {
   message,
 } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { UnitCategoryModel } from "../../model/UnitCategory";
 import { CategoryModel } from "../../model/Category";
 import { RcFile } from "antd/es/upload";
+import { useNavigate } from "react-router-dom";
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 const getBase64 = (file: FileType): Promise<string> =>
@@ -30,6 +31,7 @@ const getBase64 = (file: FileType): Promise<string> =>
   });
 
 export const ProductForm = () => {
+  const navigate = useNavigate();
   const [unitCategories, setUnitCategories] =
     useState<Array<UnitCategoryModel>>();
   const [categories, setCategories] = useState<Array<CategoryModel>>();
@@ -64,7 +66,12 @@ export const ProductForm = () => {
     setPreviewImage(file.url || (file.preview as string));
   };
 
-  const handleSubmit = (values: any) => {
+  const handleSubmit = async (values: any) => {
+    if (!img) {
+      message.error("no image");
+      return;
+    }
+
     const formData = new FormData();
     const submitValues = {
       name: values.name,
@@ -72,8 +79,8 @@ export const ProductForm = () => {
       price: values.price,
       unit_id: values.unit_id,
       slug: values.slug,
-      description: values.description ?? undefined,
-      categories: JSON.stringify(values.categories),
+      description: values.description ?? "",
+      categories: JSON.stringify(values.categories ?? []),
     };
 
     Object.keys(submitValues).forEach((key) => {
@@ -84,10 +91,15 @@ export const ProductForm = () => {
 
     formData.append("file", img as RcFile);
 
-    axios.post("http://localhost:3000/products", formData).then((res) => {
-      console.log(values);
-      return;
-    });
+    try {
+      await axios.post("http://localhost:3000/products", formData).then(() => {
+        message.success("Successfully added");
+        navigate("../dashboard/product");
+      });
+    } catch (e) {
+      const error = e as AxiosError;
+      console.log(error.response?.statusText);
+    }
   };
 
   return (
@@ -183,7 +195,11 @@ export const ProductForm = () => {
                 >
                   <InputNumber style={{ width: "100%" }} />
                 </Form.Item>
-                <Form.Item name={"unit_id"} label={"Unit"}>
+                <Form.Item
+                  name={"unit_id"}
+                  label={"Unit"}
+                  rules={[{ required: true }]}
+                >
                   <Select>
                     {unitCategories.map((x) => (
                       <Select.Option key={x.id} value={x.id}>
@@ -205,7 +221,7 @@ export const ProductForm = () => {
                 <Form.Item
                   name={"description"}
                   label={"Description"}
-                  style={{ width: 500 }}
+                  style={{ width: "100%" }}
                   labelCol={{ span: 24 }}
                 >
                   <TextArea style={{ height: 220, maxHeight: 220 }} />
